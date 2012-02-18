@@ -4,6 +4,7 @@
 package models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import play.db.jpa.Model;
@@ -15,6 +16,7 @@ import play.db.jpa.Model;
  * @author Juan Edi
  * @since Feb 18, 2012
  */
+@Entity
 @Table(name = "player")
 public class Player extends Model {
 

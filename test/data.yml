@@ -5,3 +5,9 @@
 #   email: bob@gmail.com
 #   password: secret
 #   fullname: Bob
+
+Player(jedi):
+    username: jedi
+    password: jedi
+    firstName: Juan
+    lastName: Edi

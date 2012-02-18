@@ -3,6 +3,7 @@
  */
 package models;
 
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import play.db.jpa.Model;
@@ -14,6 +15,7 @@ import play.db.jpa.Model;
  * @author Juan Edi
  * @since Feb 18, 2012
  */
+@Entity
 @Table(name = "venue")
 public class Venue extends Model {
 
