@@ -26,12 +26,11 @@ public class Players extends Controller {
     }
     
     public static void detail(final String username) {
-        Player player = Player.find("byUsername", username).first();
-        long playedGames = RegularMatchParticipation.playedGames(player);
-        if (player == null) {
+        PlayerStat playerStat = PlayerStat.forPlayer(username);
+        if (playerStat == null) {
             response.status = 404;
         } else {
-            render(player, playedGames);
+            render(playerStat);
         }
     }
     

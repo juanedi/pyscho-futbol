@@ -2,10 +2,19 @@
 #{set title:'Pyscho Futbol - Jugadores' /}
 #{set menuItem:'nav-players' /}
 
-<h2>${player.username}</h2>
+<h2>${playerStat.player.username}</h2>
 <div class="info-line">
-  <span class="line-header">Nombre completo</span>${player.firstName} ${player.lastName}
+  <span class="line-header">Nombre completo</span>${playerStat.player.firstName} ${playerStat.player.lastName}
 </div>
 <div class="info-line">
-  <span class="line-header">Partidos jugados</span>${playedGames}
+  <span class="line-header">Partidos jugados</span>${playerStat.victories + playerStat.draws + playerStat.defeats}
+</div>
+<div class="info-line">
+  <span class="line-header">Ganados</span>${playerStat.victories}
+</div>
+<div class="info-line">
+  <span class="line-header">Empatados</span>${playerStat.draws}
+</div>
+<div class="info-line">
+  <span class="line-header">Perdidos</span>${playerStat.defeats}
 </div>

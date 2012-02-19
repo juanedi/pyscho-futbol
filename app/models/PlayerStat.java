@@ -27,6 +27,10 @@ public class PlayerStat extends Model {
     public long draws;
     public long defeats;
     public long goals;
+
+    public static PlayerStat forPlayer(final String username) {
+        return PlayerStat.find("player.username", username).first();
+    }
     
     public static PlayerStat forPlayer(final Player player) {
         return PlayerStat.find("byPlayer", player).first();
