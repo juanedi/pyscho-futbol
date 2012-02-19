@@ -33,4 +33,5 @@ public abstract class MatchParticipation extends Model {
     public int goals;
     
     public abstract String getPlayerDisplayName();
+    
 }

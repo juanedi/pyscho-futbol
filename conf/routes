@@ -6,8 +6,8 @@
 GET     /                                       Application.index
 
 # Players
-GET     /players                                Players.list
-
+GET     /players/?                              Players.list
+GET     /players/{username}/?                   Players.detail
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

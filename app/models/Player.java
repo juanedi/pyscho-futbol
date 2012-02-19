@@ -3,11 +3,12 @@
  */
 package models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import dto.StrikerDTO;
 
 import play.db.jpa.Model;
 import play.libs.Crypto;
@@ -21,10 +22,9 @@ import play.libs.Crypto;
  */
 @Entity
 @Table(name = "players")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Player extends Model {
 
-    public static String STRIKER_QUERY = "select p.player from RegularMatchParticipation p group by p.player order by sum(p.goals)";
+    public static String STRIKER_QUERY = "select new dto.StrikerDTO(p.player, sum(p.goals), max(p.match.date)) from RegularMatchParticipation p group by p.player order by sum(p.goals) desc";
     
     public String username;
     public String password;
@@ -39,8 +39,7 @@ public class Player extends Model {
         this.password = Crypto.encryptAES(password);
     }
 
-    public static Player allTimeStriker() {
+    public static StrikerDTO allTimeStriker() {
         return Player.find(STRIKER_QUERY).first();
     }
-    
 }

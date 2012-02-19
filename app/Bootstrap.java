@@ -8,21 +8,19 @@ import play.test.Fixtures;
  */
 
 /**
- * Importa data de prueba
+ * TODO Descripcion de la clase. Los comentarios van en castellano.
  * 
  * 
  * @author Juan Edi
- * @since Feb 18, 2012
+ * @since Feb 19, 2012
  */
 @OnApplicationStart
 public class Bootstrap extends Job {
 
     public void doJob() {
-        Fixtures.deleteDatabase();
-        Fixtures.load("data.yml");
-//        if (Player.count() == 0) {
-//        }
-        
+        if (Player.count() == 0) {
+            Fixtures.loadModels("data.yml");
+        }
     }
     
 }

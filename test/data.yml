@@ -24,3 +24,33 @@ Player(fede):
     password: fmolina
     firstName: Federico
     lastName: Molina
+    
+Match(m1):
+    date: 2012-01-01
+    finished: true
+    goalsTeamA: 4
+    goalsTeamB: 3
+    
+Match(m2):
+    date: 2012-01-08
+    finished: true
+    goalsTeamA: 2
+    goalsTeamB: 2
+    
+RegularMatchParticipation(mp1):
+    match: m1
+    teamA: true
+    goals: 4
+    player: jedi
+    
+RegularMatchParticipation(mp2):
+    match: m1
+    teamA: true
+    goals: 2
+    player: fede
+    
+RegularMatchParticipation(mp3):
+    match: m2
+    teamA: true
+    goals: 3
+    player: fede

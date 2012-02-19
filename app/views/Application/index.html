@@ -36,7 +36,7 @@
 	<div class="span4 offset1">
         <div class="content-box">
             <h4>MVP</h4>
-            <h3><a>${mvp.firstName} ${mvp.lastName}</a></h3>
+            <h3><a href="/players/${mvp.username}/">${mvp.firstName} ${mvp.lastName}</a></h3>
         </div>
     </div>
 </div>
@@ -45,13 +45,19 @@
     <div class="span4">
         <div class="content-box">
             <h4>Pichichi</h4>
-            <h3><a>${pichichi.firstName} ${pichichi.lastName}</a></h3><span>(10 goles)</span>
+            <h3><a href="/players/${striker.player.username}/">${striker.player.firstName} ${striker.player.lastName}</a></h3>
+            <div class="info-line">
+                <span class="line-header">Goles</span>${striker.goals}
+            </div>
+            <div class="info-line">
+                <span class="line-header">Último gol</span>${striker.lastGoal.format('dd/MM/yyyy')}
+            </div>
         </div>
     </div>
     <div class="span4 offset1">
         <div class="content-box">
             <h4>Piedra</h4>
-            <h3><a>${piedra.firstName} ${piedra.lastName}</a></h3>
+            <h3><a href="/players/${piedra.username}/">${piedra.firstName} ${piedra.lastName}</a></h3>
         </div>
     </div>
 </div>

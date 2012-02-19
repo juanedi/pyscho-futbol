@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Pyscho Futbol - Jugadores' /}
+#{set menuItem:'nav-players' /}
+
+<h2>${player.username}</h2>
+<div class="info-line">
+  <span class="line-header">Nombre completo</span>${player.firstName} ${player.lastName}
+</div>
+<div class="info-line">
+  <span class="line-header">Partidos jugados</span>${playedGames}
+</div>
