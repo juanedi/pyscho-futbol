@@ -4,7 +4,7 @@
 #{if pendingMatch}
     <div class="row">
     <div class="span8">
-        <div class="content-box">
+        <div class="well">
             <h2><a href="#">Próximo partido</a></h2>
             <div class="info-line">
               <span class="line-header">Fecha</span>${pendingMatch.date.format('dd/MM/yyyy')}
@@ -28,7 +28,7 @@
 
 <div class="row">
 	<div class="span4">
-        <div class="content-box">
+        <div class="well">
             <h3><a href="#">Último partido</a></h3>
             <div class="info-line">
                 <span class="line-header">Fecha</span>${lastMatch.date.format('dd/MM/yyyy')}
@@ -42,7 +42,7 @@
         </div>
 	</div>
 	<div class="span4 offset1">
-        <div class="content-box">
+        <div class="well">
             <h4>MVP</h4>
             <h3><a href="@{Players.detail(mvp.player.username)}">${mvp.player.firstName} ${mvp.player.lastName}</a></h3>
             <div class="info-line">
@@ -54,7 +54,7 @@
 
 <div class="row">
     <div class="span4">
-        <div class="content-box">
+        <div class="well">
             <h4>Pichichi</h4>
             <h3><a href="@{Players.detail(striker.player.username)}">${striker.player.firstName} ${striker.player.lastName}</a></h3>
             <div class="info-line">
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="span4 offset1">
-        <div class="content-box">
+        <div class="well">
             <h4>Piedra</h4>
             <h3><a href="@{Players.detail(lvp.player.username)}">${lvp.player.firstName} ${lvp.player.lastName}</a></h3>
             <div class="info-line">
