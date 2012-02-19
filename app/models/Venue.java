@@ -16,7 +16,7 @@ import play.db.jpa.Model;
  * @since Feb 18, 2012
  */
 @Entity
-@Table(name = "venue")
+@Table(name = "venues")
 public class Venue extends Model {
 
     public String name;

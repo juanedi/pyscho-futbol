@@ -18,10 +18,10 @@ import play.test.Fixtures;
 public class Bootstrap extends Job {
 
     public void doJob() {
-
-        if (Player.count() == 0) {
-            Fixtures.load("data.yml");
-        }
+        Fixtures.deleteDatabase();
+        Fixtures.load("data.yml");
+//        if (Player.count() == 0) {
+//        }
         
     }
     
