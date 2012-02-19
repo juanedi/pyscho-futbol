@@ -11,3 +11,16 @@ Player(jedi):
     password: jedi
     firstName: Juan
     lastName: Edi
+    
+    
+Player(tiny):
+    username: mrtnslv
+    password: mrtnslv
+    firstName: Martín
+    lastName: Silva
+    
+Player(fede):
+    username: fmolina
+    password: fmolina
+    firstName: Federico
+    lastName: Molina

@@ -1,10 +1,10 @@
-#{extends 'bootstrap.html' /}
+#{extends 'main.html' /}
 #{set title:'Pyscho Futbol' /}
 
 <div class="row">
     <div class="span8">
         <div class="content-box">
-            <h2><a href="#">Próximo partido</a></h2>
+            <h2><a href="#">PrÃ³ximo partido</a></h2>
             <div class="info-line">
               <span class="line-header">Fecha</span>05/03/2012
             </div>
@@ -21,7 +21,7 @@
 <div class="row">
 	<div class="span4">
         <div class="content-box">
-            <h3><a href="#">Último partido</a></h3>
+            <h3><a href="#">Ãšltimo partido</a></h3>
             <div class="info-line">
                 <span class="line-header">Fecha</span>05/03/2012
             </div>
@@ -36,7 +36,7 @@
 	<div class="span4 offset1">
         <div class="content-box">
             <h4>MVP</h4>
-            <h3><a>Martín Silva</a></h3>
+            <h3><a>${mvp.firstName} ${mvp.lastName}</a></h3>
         </div>
     </div>
 </div>
@@ -45,13 +45,13 @@
     <div class="span4">
         <div class="content-box">
             <h4>Pichichi</h4>
-            <h3><a>Juan Edi</a></h3><span>(10 goles)</span>
+            <h3><a>${pichichi.firstName} ${pichichi.lastName}</a></h3><span>(10 goles)</span>
         </div>
     </div>
     <div class="span4 offset1">
         <div class="content-box">
             <h4>Piedra</h4>
-            <h3><a>Federico Molina</a></h3>
+            <h3><a>${piedra.firstName} ${piedra.lastName}</a></h3>
         </div>
     </div>
 </div>

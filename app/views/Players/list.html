@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Pyscho Futbol - Jugadores' /}
+#{set menuItem:'nav-players' /}
+
+#{if players.size()}
+<div class="row">
+    <div class="span12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Jugador</th>
+                    <th>Ganados</th>
+                    <th>Empatados</th>
+                    <th>Perdidos</th>
+                    <th>Goles</th>
+                </tr>
+            </thead>
+            <tbody>
+	        #{list items:players, as:'player'}
+	            <tr>
+	               <td><a href="#">${player.username} (${player.firstName} ${player.lastName})</a></td>
+	               <td>4</td>
+	               <td>1</td>
+	               <td>2</td>
+	               <td>10</td>
+	            </tr>
+	        #{/list}
+	        </tbody>
+        </table>
+    
+    </div>
+</div>
+#{/if}
