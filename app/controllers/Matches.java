@@ -19,7 +19,7 @@ import play.mvc.Http.StatusCode;
  * @author Juan Edi
  * @since Feb 19, 2012
  */
-public class Matches extends Controller {
+public class Matches extends SecureController {
 
     public static void list() {
         render();

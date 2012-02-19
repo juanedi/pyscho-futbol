@@ -3,6 +3,7 @@
  */
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -17,6 +18,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("GUEST")
 public class GuestMatchParticipation extends MatchParticipation {
 
+    @Column(name = "guest_name")
     public String guestName;
     
     /** @see models.MatchParticipation#getPlayerDisplayName() */

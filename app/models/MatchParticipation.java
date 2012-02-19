@@ -21,7 +21,7 @@ import play.db.jpa.Model;
  * @since Feb 18, 2012
  */
 @Entity
-@Table(name = "match_participations")
+@Table(name = "match_participations", uniqueConstraints = @UniqueConstraint(columnNames={"match_id", "guest_name"}))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class MatchParticipation extends Model {
 
@@ -33,5 +33,5 @@ public abstract class MatchParticipation extends Model {
     public int goals;
     
     public abstract String getPlayerDisplayName();
-    
+
 }

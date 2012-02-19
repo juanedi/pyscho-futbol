@@ -41,5 +41,9 @@ public class Player extends Model {
     public static StrikerDTO allTimeStriker() {
         return Player.find(STRIKER_QUERY).first();
     }
+
+    public boolean hasJoined(Match match) {
+        return MatchParticipation.count("player = ?1 and match = ?2", this, match) != 0L;
+    }
     
 }

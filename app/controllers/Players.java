@@ -18,7 +18,7 @@ import play.mvc.Controller;
  * @author Juan Edi
  * @since Feb 18, 2012
  */
-public class Players extends Controller {
+public class Players extends SecureController {
 
     public static void list() {
         List<Object> playerStats = PlayerStat.all().fetch();

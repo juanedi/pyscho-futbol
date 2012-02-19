@@ -9,8 +9,7 @@ import dto.StrikerDTO;
 
 import models.*;
 
-@With(Secure.class)
-public class Application extends Controller {
+public class Application extends SecureController {
 
     public static void index() {
         Match pendingMatch = Match.nextMatch();
@@ -23,4 +22,5 @@ public class Application extends Controller {
         render(pendingMatch, lastMatch, lastStriker, mvp, striker, lvp);
     }
 
+    
 }
