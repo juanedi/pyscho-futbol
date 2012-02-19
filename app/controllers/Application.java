@@ -14,8 +14,8 @@ public class Application extends Controller {
 
     public static void index() {
         StrikerDTO striker = Player.allTimeStriker();
-        Player mvp = Player.find("byUsername", "mrtnslv").first();
-        Player piedra = Player.find("byUsername", "fmolina").first();
+        Player mvp = PlayerStat.mvp().player;
+        Player piedra = PlayerStat.lvp().player;
         render(mvp, striker, piedra);
     }
 

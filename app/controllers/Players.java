@@ -6,6 +6,7 @@ package controllers;
 import java.util.List;
 
 import models.Player;
+import models.PlayerStat;
 import models.RegularMatchParticipation;
 import play.db.jpa.GenericModel.JPAQuery;
 import play.mvc.Controller;
@@ -20,8 +21,8 @@ import play.mvc.Controller;
 public class Players extends Controller {
 
     public static void list() {
-        List<Player> players = Player.all().fetch();
-        render(players);
+        List<Object> playerStats = PlayerStat.all().fetch();
+        render(playerStats);
     }
     
     public static void detail(final String username) {

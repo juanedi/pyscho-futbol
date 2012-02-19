@@ -1,11 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Pyscho Futbol - Jugadores' /}
+#{set 'moreScripts'}
+    #{script 'jquery.tablesorter.min.js'/}
+    #{script 'players.js'/}
+#{/set}
 #{set menuItem:'nav-players' /}
 
-#{if players.size()}
+#{if playerStats.size()}
 <div class="row">
     <div class="span12">
-        <table class="table">
+        <table id="jPlayerStats" class="table">
             <thead>
                 <tr>
                     <th>Jugador</th>
@@ -16,13 +20,13 @@
                 </tr>
             </thead>
             <tbody>
-	        #{list items:players, as:'player'}
+	        #{list items:playerStats, as:'stat'}
 	            <tr>
-	               <td><a href="/players/${player.username}/">${player.username} (${player.firstName} ${player.lastName})</a></td>
-	               <td>4</td>
-	               <td>1</td>
-	               <td>2</td>
-	               <td>10</td>
+	               <td><a href="/players/${stat.player.username}/">${stat.player.username} (${stat.player.firstName} ${stat.player.lastName})</a></td>
+	               <td>${stat.victories}</td>
+	               <td>${stat.draws}</td>
+	               <td>${stat.defeats}</td>
+	               <td>${stat.goals}</td>
 	            </tr>
 	        #{/list}
 	        </tbody>

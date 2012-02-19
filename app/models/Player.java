@@ -4,14 +4,11 @@
 package models;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-
-import dto.StrikerDTO;
 
 import play.db.jpa.Model;
 import play.libs.Crypto;
+import dto.StrikerDTO;
 
 /**
  * Jugador
@@ -24,7 +21,9 @@ import play.libs.Crypto;
 @Table(name = "players")
 public class Player extends Model {
 
-    public static String STRIKER_QUERY = "select new dto.StrikerDTO(p.player, sum(p.goals), max(p.match.date)) from RegularMatchParticipation p group by p.player order by sum(p.goals) desc";
+    public static String STRIKER_QUERY = 
+        "select new dto.StrikerDTO(p.player, sum(p.goals), max(p.match.date)) from RegularMatchParticipation p " 
+        + "group by p.player order by sum(p.goals) desc";
     
     public String username;
     public String password;
@@ -42,4 +41,5 @@ public class Player extends Model {
     public static StrikerDTO allTimeStriker() {
         return Player.find(STRIKER_QUERY).first();
     }
+    
 }

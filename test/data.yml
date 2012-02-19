@@ -13,18 +13,39 @@ Player(jedi):
     lastName: Edi
     
     
-Player(tiny):
+Player(mrtnslv):
     username: mrtnslv
     password: mrtnslv
     firstName: Martín
     lastName: Silva
     
-Player(fede):
+Player(fmolina):
     username: fmolina
     password: fmolina
     firstName: Federico
     lastName: Molina
-    
+
+PlayerStat(s_jedi):
+    player: jedi
+    victories: 1
+    draws: 1
+    defeats: 0
+    goals: 4
+
+PlayerStat(s_fmolina):
+    player: fmolina
+    victories: 0
+    draws: 1
+    defeats: 1
+    goals: 4
+
+PlayerStat(s_mrtnslv):
+    player: mrtnslv
+    victories: 1
+    draws: 1
+    defeats: 0
+    goals: 2
+
 Match(m1):
     date: 2012-01-01
     finished: true
@@ -40,17 +61,35 @@ Match(m2):
 RegularMatchParticipation(mp1):
     match: m1
     teamA: true
-    goals: 4
+    goals: 2
     player: jedi
     
-RegularMatchParticipation(mp2):
+RegularMatchParticipation(mp1):
+    match: m2
+    teamA: true
+    goals: 2
+    player: jedi
+    
+RegularMatchParticipation(mp3):
+    match: m1
+    teamA: false
+    goals: 3
+    player: fmolina
+    
+RegularMatchParticipation(mp4):
+    match: m2
+    teamA: false
+    goals: 1
+    player: fmolina
+    
+RegularMatchParticipation(mp5):
     match: m1
     teamA: true
     goals: 2
-    player: fede
+    player: mrtnslv
     
-RegularMatchParticipation(mp3):
+RegularMatchParticipation(mp6):
     match: m2
-    teamA: true
-    goals: 3
-    player: fede
+    teamA: false
+    goals: 1
+    player: mrtnslv
