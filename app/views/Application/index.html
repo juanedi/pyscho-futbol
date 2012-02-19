@@ -31,13 +31,13 @@
         <div class="content-box">
             <h3><a href="#">Último partido</a></h3>
             <div class="info-line">
-                <span class="line-header">Fecha</span>05/03/2012
+                <span class="line-header">Fecha</span>${lastMatch.date.format('dd/MM/yyyy')}
             </div>
             <div class="info-line">
-                <span class="line-header">Resultado</span>4-3
+                <span class="line-header">Resultado</span>${lastMatch.goalsTeamA} - ${lastMatch.goalsTeamB}
             </div>
             <div class="info-line">
-                <span class="line-header">Goleador</span>Federico Molina
+                <span class="line-header">Goleador</span>${lastStriker.playerDisplayName}
             </div>
         </div>
 	</div>

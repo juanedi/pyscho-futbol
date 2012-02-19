@@ -62,5 +62,12 @@ public class Match extends Model {
     public static Match nextMatch() {
         return Match.find("finished", false).first();
     }
+
+    public static Match lastMatch() {
+        return Match.find("finished = true order by date desc").first();
+    }
     
+    public static MatchParticipation striker(Match match) {
+        return MatchParticipation.find("match = ?1 order by goals desc", match).first();
+    }
 }
