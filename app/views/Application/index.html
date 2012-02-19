@@ -36,7 +36,10 @@
 	<div class="span4 offset1">
         <div class="content-box">
             <h4>MVP</h4>
-            <h3><a href="/players/${mvp.username}/">${mvp.firstName} ${mvp.lastName}</a></h3>
+            <h3><a href="/players/${mvp.player.username}/">${mvp.player.firstName} ${mvp.player.lastName}</a></h3>
+            <div class="info-line">
+                <span class="line-header">Partidos ganados</span>${mvp.victories}
+            </div>
         </div>
     </div>
 </div>
@@ -57,7 +60,10 @@
     <div class="span4 offset1">
         <div class="content-box">
             <h4>Piedra</h4>
-            <h3><a href="/players/${piedra.username}/">${piedra.firstName} ${piedra.lastName}</a></h3>
+            <h3><a href="/players/${lvp.player.username}/">${lvp.player.firstName} ${lvp.player.lastName}</a></h3>
+            <div class="info-line">
+                <span class="line-header">Partidos perdidos</span>${lvp.defeats}
+            </div>
         </div>
     </div>
 </div>
