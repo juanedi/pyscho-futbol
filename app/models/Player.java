@@ -24,6 +24,8 @@ import play.libs.Crypto;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Player extends Model {
 
+    public static String STRIKER_QUERY = "select p.player from RegularMatchParticipation p group by p.player order by sum(p.goals)";
+    
     public String username;
     public String password;
     public String firstName;
@@ -37,4 +39,8 @@ public class Player extends Model {
         this.password = Crypto.encryptAES(password);
     }
 
+    public static Player allTimeStriker() {
+        return Player.find(STRIKER_QUERY).first();
+    }
+    
 }
