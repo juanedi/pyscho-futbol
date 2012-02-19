@@ -1,22 +1,30 @@
 #{extends 'main.html' /}
 #{set title:'Pyscho Futbol' /}
 
-<div class="row">
+#{if pendingMatch}
+    <div class="row">
     <div class="span8">
         <div class="content-box">
             <h2><a href="#">Próximo partido</a></h2>
             <div class="info-line">
-              <span class="line-header">Fecha</span>05/03/2012
+              <span class="line-header">Fecha</span>${pendingMatch.date.format('dd/MM/yyyy')}
             </div>
             <div class="info-line">
-              <span class="line-header">Lugar</span>Open Gallo
+              <span class="line-header">Lugar</span>${pendingMatch.venue.name}
             </div>
             <div class="info-line">
-              <span class="line-header">Jugadores confirmados</span>6
+              <span class="line-header">Jugadores confirmados</span>${pendingMatch.participations.size()}
+            </div>
+            <div class="match-actions">
+                #{form @Matches.cancel(pendingMatch.id), class:'form-inline'}
+                <a class="btn" href="#">Cargar datos</a>
+                <button type="submit" class="btn">Cancelar partido</button>
+                #{/form}
             </div>
         </div>
     </div>
 </div>
+#{/if}
 
 <div class="row">
 	<div class="span4">
@@ -36,7 +44,7 @@
 	<div class="span4 offset1">
         <div class="content-box">
             <h4>MVP</h4>
-            <h3><a href="/players/${mvp.player.username}/">${mvp.player.firstName} ${mvp.player.lastName}</a></h3>
+            <h3><a href="@{Players.detail(mvp.player.username)}">${mvp.player.firstName} ${mvp.player.lastName}</a></h3>
             <div class="info-line">
                 <span class="line-header">Partidos ganados</span>${mvp.victories}
             </div>
@@ -48,7 +56,7 @@
     <div class="span4">
         <div class="content-box">
             <h4>Pichichi</h4>
-            <h3><a href="/players/${striker.player.username}/">${striker.player.firstName} ${striker.player.lastName}</a></h3>
+            <h3><a href="@{Players.detail(striker.player.username)}">${striker.player.firstName} ${striker.player.lastName}</a></h3>
             <div class="info-line">
                 <span class="line-header">Goles</span>${striker.goals}
             </div>
@@ -60,10 +68,16 @@
     <div class="span4 offset1">
         <div class="content-box">
             <h4>Piedra</h4>
-            <h3><a href="/players/${lvp.player.username}/">${lvp.player.firstName} ${lvp.player.lastName}</a></h3>
+            <h3><a href="@{Players.detail(lvp.player.username)}">${lvp.player.firstName} ${lvp.player.lastName}</a></h3>
             <div class="info-line">
                 <span class="line-header">Partidos perdidos</span>${lvp.defeats}
             </div>
         </div>
     </div>
 </div>
+
+#{ifnot pendingMatch}
+	<div class="alert alert-info">
+	  No hay próximos partidos agendados! <a href="@{Matches.input}">Cargar uno</a>.
+	</div>
+#{/ifnot}

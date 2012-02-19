@@ -25,3 +25,7 @@
 .navbar .nav.pull-right {
 	margin-right: 25px;
 }
+
+.match-actions {
+	text-align: right;
+}

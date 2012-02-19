@@ -93,3 +93,11 @@ RegularMatchParticipation(mp6):
     teamA: false
     goals: 1
     player: mrtnslv
+    
+Venue(v1):
+    name: El Portón
+    address: lala
+    
+Venue(v2):
+    name: Open Gallo
+    address: lala

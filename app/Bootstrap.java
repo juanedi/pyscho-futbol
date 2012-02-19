@@ -19,7 +19,7 @@ public class Bootstrap extends Job {
 
     public void doJob() {
         if (Player.count() == 0) {
-            Fixtures.loadModels("data.yml");
+//            Fixtures.loadModels("data.yml");
         }
     }
     

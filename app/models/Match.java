@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import play.db.jpa.Model;
@@ -30,6 +31,8 @@ import play.db.jpa.Model;
 public class Match extends Model {
 
     public Date date;
+    
+    @OneToOne
     public Venue venue;
     public boolean finished;
     public Integer goalsTeamA;
@@ -54,6 +57,10 @@ public class Match extends Model {
            }
        }
        return ret;
+    }
+
+    public static Match nextMatch() {
+        return Match.find("finished", false).first();
     }
     
 }

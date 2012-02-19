@@ -4,9 +4,9 @@
                    <a class="brand" href="/">psycho futbol</a>
                    <div class="nav-collapse">
                     <ul class="nav">
-                      <li id="nav-match"><a href="#">Cargar partido</a></li>
-                      <li id="nav-historic"><a href="#">Historial</a></li>
-                      <li id="nav-players"><a href="/players">Jugadores</a></li>
+                      <li id="nav-historic"><a href="@{Matches.list}">Historial</a></li>
+                      <li id="nav-players"><a href="@{Players.list}">Jugadores</a></li>
+                      <li id="nav-input"><a href="#">Canchas</a></li>
                     </ul>
                     <ul class="nav pull-right">
                        <li><a href="@{Secure.logout()}">Log out</a></li>

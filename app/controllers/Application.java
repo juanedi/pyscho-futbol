@@ -13,10 +13,11 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
+        Match pendingMatch = Match.nextMatch();
         StrikerDTO striker = Player.allTimeStriker();
         PlayerStat mvp = PlayerStat.mvp();
         PlayerStat lvp = PlayerStat.lvp();
-        render(mvp, striker, lvp);
+        render(pendingMatch, mvp, striker, lvp);
     }
 
 }
