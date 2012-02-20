@@ -72,6 +72,7 @@ $(document).ready(function() {
 			var content = $('.jTeamDisplay.jTemplate').clone().removeClass('jTemplate');
 			content.prepend(selection);
 			td.append(content);
+			$("#jPlayers").trigger("update");
 		});
 	});
 
@@ -85,6 +86,7 @@ $(document).ready(function() {
 			td.empty();
 			var content = $('.jTeamSelect.jTemplate').clone().removeClass('jTemplate');
 			td.append(content);
+			$("#jPlayers").trigger("update");
 		});
 	});
 	
