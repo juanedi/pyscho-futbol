@@ -1,4 +1,7 @@
 #{extends 'main.html' /}
+#{set 'moreScripts'}
+    #{script 'home.js'/}
+#{/set}
 #{set title:'Pyscho Futbol' /}
 
 #{if pendingMatch}
@@ -33,7 +36,7 @@
                     <button type="submit" class="btn">Cargar datos</button>
                 </form>
                 
-                #{form @Matches.cancel(pendingMatch.id)}
+                #{form @Matches.cancel(pendingMatch.id), id:'jCancelMatch'}
                 <button type="submit" class="btn btn-danger">Cancelar partido</button>
                 #{/form}
             </div>
@@ -93,5 +96,5 @@
 </div>
 
 <div class="alert alert-info #{get 'newMatchClass' /}">
-  No hay próximos partidos agendados! <a href="@{Matches.input}">Cargar uno</a>.
+  No hay próximos partidos agendados! <a href="@{Matches.newMatch}">Cargar uno</a>.
 </div>

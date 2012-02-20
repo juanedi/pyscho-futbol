@@ -11,7 +11,7 @@ GET     /players/{username}/?                   Players.detail
 
 # Matches
 GET     /matches/?                              Matches.list
-GET     /matches/input/?                        Matches.input
+GET     /matches/new/?                          Matches.newMatch
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

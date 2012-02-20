@@ -27,10 +27,9 @@ public class Matches extends SecureController {
         render();
     }
 
-    public static void input() {
-        Match pendingMatch = Match.nextMatch();
+    public static void newMatch() {
         List<Venue> venues = Venue.all().fetch();
-        render(pendingMatch, venues);
+        render(venues);
     }
 
     public static void postMatch(@Required final Date date, @Required final Long venueId) {
