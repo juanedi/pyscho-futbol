@@ -1,0 +1,61 @@
+#{extends 'main.html' /}
+#{set title:'Pyscho Futbol - Historial de Partidos' /}
+#{set menuItem:'nav-historic' /}
+
+<div class="row">
+    <div class="span8">
+        <div class="well">
+	        <span class="well-header">Partido ${match.id}</span>
+	        
+	        <div class="row teams-details">
+	           <div class="span8">
+	               <div class="row">
+			           <div class="span4">
+			               <h3>Equipo A <em>(${match.goalsTeamA})</em></h3>
+			               <ol>
+			               #{list items:match.playersTeamA, as:'participation'}
+			                 <li>
+			                     ${participation.playerDisplayName}
+		                         #{if participation.goals}
+		                          (${participation.goals} goles)
+		                         #{/if}
+			                 </li>
+			               #{/list}
+			               </ol>
+			           </div>
+			           <div class="span4">
+		                   <h3>Equipo B <em>(${match.goalsTeamB})</em></h3>
+                           <ol>
+                           #{list items:match.playersTeamA, as:'participation'}
+                             <li>
+                                 ${participation.playerDisplayName}
+                                 #{if participation.goals}
+                                  (${participation.goals} goles)
+                                 #{/if}
+                             </li>
+                           #{/list}
+                           </ol>
+		               </div>
+	               </div>
+               </div>
+	        </div>
+	  
+	        <div class="info-line">
+              <span class="line-header">Fecha</span>${match.date.format('dd/MM/yyyy')}
+            </div>
+            <div class="info-line">
+              <span class="line-header">Lugar</span>${match.venue.name}
+            </div>
+            #{if match.striker().goals}
+            <div class="info-line">
+              <span class="line-header">Goleador</span>${match.striker().playerDisplayName} (${match.striker().goals})
+            </div>
+	        #{/if}
+		    #{form @Matches.list()}
+		    <div class="form-actions">
+		        <button type="submit" class="btn btn-primary">Aceptar</button>
+		    </div>
+		    #{/form}
+        </div>
+    </div>
+</div>

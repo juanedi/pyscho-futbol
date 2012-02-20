@@ -12,6 +12,7 @@ import models.Player;
 import models.RegularMatchParticipation;
 import models.Venue;
 import play.data.validation.Required;
+import play.db.jpa.JPABase;
 import play.mvc.Http.StatusCode;
 
 /**
@@ -24,9 +25,15 @@ import play.mvc.Http.StatusCode;
 public class Matches extends SecureController {
 
     public static void list() {
-        render();
+        List<Match> matches = Match.find("finished", true).fetch();
+        render(matches);
     }
 
+    public static void detail(final Long id) {
+        Match match = Match.findById(id);
+        render(match);
+    }
+    
     public static void newMatch() {
         List<Venue> venues = Venue.all().fetch();
         render(venues);

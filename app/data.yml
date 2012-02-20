@@ -46,17 +46,31 @@ PlayerStat(s_mrtnslv):
     defeats: 0
     goals: 2
 
+Venue(v1):
+    name: El Portón
+    address: O´Higgins 3487
+    
+Venue(v2):
+    name: Open Gallo
+    address: Gallo 241
+    
+Venue(v3):
+    name: Lacroze & Thomas
+    address: Av. Federico Lacroze 3547
+
 Match(m1):
     date: 2012-01-01
     finished: true
     goalsTeamA: 4
     goalsTeamB: 3
+    venue: v1
     
 Match(m2):
     date: 2012-01-08
     finished: true
     goalsTeamA: 2
     goalsTeamB: 2
+    venue: v2
     
 RegularMatchParticipation(mp1):
     match: m1
@@ -93,15 +107,3 @@ RegularMatchParticipation(mp6):
     teamA: false
     goals: 1
     player: mrtnslv
-    
-Venue(v1):
-    name: El Portón
-    address: O´Higgins 3487
-    
-Venue(v2):
-    name: Open Gallo
-    address: Gallo 241
-    
-Venue(v3):
-    name: Lacroze & Thomas
-    address: Av. Federico Lacroze 3547

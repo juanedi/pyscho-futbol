@@ -2,4 +2,38 @@
 #{set title:'Pyscho Futbol - Historial de Partidos' /}
 #{set menuItem:'nav-historic' /}
 
-Acá iría el listado de partidos
+#{if matches.size()}
+<div class="row">
+    <div class="span12">
+        <span class="well-header">Partidos</span>
+        <table id="jMatches" class="table well">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Goles A</th>
+                    <th>Goles B</th>
+                    <th>Goleador</th>
+                </tr>
+            </thead>
+            <tbody>
+            #{list items:matches, as:'match'}
+                <tr>
+                   <td><a href="@{Matches.detail(match.id)}">${match.date.format('dd/MM/yyyy')}</a></td>
+                   <td>${match.goalsTeamA}</td>
+                   <td>${match.goalsTeamB}</td>
+                   <td>
+                    #{if match.striker().goals}
+                    ${match.striker().playerDisplayName} (${match.striker().goals})
+                    #{/if}
+                    #{else}
+                        -
+                    #{/else}
+                   </td>
+                </tr>
+            #{/list}
+            </tbody>
+        </table>
+    
+    </div>
+</div>
+#{/if}

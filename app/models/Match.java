@@ -60,6 +60,10 @@ public class Match extends Model {
        return ret;
     }
 
+    public MatchParticipation striker() {
+        return MatchParticipation.find("match = ?1 order by goals desc", this).first();
+    }
+    
     public static Match nextMatch() {
         return Match.find("finished", false).first();
     }
@@ -68,7 +72,4 @@ public class Match extends Model {
         return Match.find("finished = true order by date desc").first();
     }
     
-    public static MatchParticipation striker(Match match) {
-        return MatchParticipation.find("match = ?1 order by goals desc", match).first();
-    }
 }

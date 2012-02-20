@@ -1,5 +1,6 @@
 .info-line {
     display: block;
+    margin-bottom: 2px;
 }
 .info-line .line-header {
     font-weight: bold;
@@ -20,4 +21,28 @@
 
 .match-actions form{
    display: inline;
+}
+
+.well-header {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 27px;
+  font-size: 19.5px;
+  line-height: 36px;
+  color: #333333;
+  border: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.teams-details {
+	margin-bottom: 20px;
+}
+
+.teams-details ol {
+	margin-top: 3px;
+}
+
+.form-actions {
+	text-align: right;
 }
