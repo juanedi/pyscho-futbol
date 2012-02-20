@@ -96,8 +96,12 @@ RegularMatchParticipation(mp6):
     
 Venue(v1):
     name: El Portón
-    address: lala
+    address: O´Higgins 3487
     
 Venue(v2):
     name: Open Gallo
-    address: lala
+    address: Gallo 241
+    
+Venue(v3):
+    name: Lacroze & Thomas
+    address: Av. Federico Lacroze 3547

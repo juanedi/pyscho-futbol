@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:'Pyscho Futbol - Historial de Partidos' /}
+#{set menuItem:'nav-venues' /}
+
+<div class="row">
+
+#{if venues.size()}
+<div class="span8">
+<div class="well">
+<legend>Canchas</legend>
+<dl>
+	#{list items:venues, as:'venue'}
+	    <dt>${venue.name}</dt>
+	    <dd><em>Dirección</em> ${venue.address}</dd>
+	#{/list}
+</dl>
+</div>
+</div>
+#{/if}
+
+<div class="span4">
+#{form @Venues.postVenue(), class:'well form-inline'}
+    <fieldset>
+      <legend>Cargar nueva cancha</legend>
+      <div class="control-group">
+        <label class="control-label" for="name">Nombre</label>
+        <div class="controls">
+            <input type="text" id="name" name="name">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="address">Direccion</label>
+        <div class="controls">
+            <input type="text" id="address" name="address">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+      </div>
+    </fieldset>
+#{/form}
+</div>
+</div>
