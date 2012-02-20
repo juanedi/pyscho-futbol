@@ -1,12 +1,16 @@
 #{extends 'main.html' /}
 #{set title:'Pyscho Futbol - Historial de Partidos' /}
+#{set 'moreScripts'}
+    #{script 'match.js'/}
+#{/set}
 #{set menuItem:'nav-historic' /}
 
 <div class="row">
     <div class="span8">
         <div class="well">
-	        <span class="well-header">Partido ${match.id}</span>
-	        
+	        <span class="well-header">Partido ${match.id} (${match.date.format('dd/MM/yyyy')})</span>
+
+            #{if match.finished}
 	        <div class="row teams-details">
 	           <div class="span8">
 	               <div class="row">
@@ -40,9 +44,6 @@
                </div>
 	        </div>
 	  
-	        <div class="info-line">
-              <span class="line-header">Fecha</span>${match.date.format('dd/MM/yyyy')}
-            </div>
             <div class="info-line">
               <span class="line-header">Lugar</span>${match.venue.name}
             </div>
@@ -56,6 +57,56 @@
 		        <button type="submit" class="btn btn-primary">Aceptar</button>
 		    </div>
 		    #{/form}
+		    #{/if}
+		    
+		    #{else}
+		        #{if match.participations}
+		        <h3>Jugadores confirmados</h3>
+		        <table class="table players-list">
+                  #{list match.participationsByDate, as:'participation'}
+                    <tr>
+                      <td>${participation_index}</td>
+                      <td>
+                        #{if participation.guest}<em>${participation.playerDisplayName}</em>#{/if}
+                        #{else}${participation.playerDisplayName}#{/else}
+                      </td>
+                    </tr>
+                  #{/list}
+		        </table>
+		        #{/if}
+		        #{else}
+					<div class="alert alert-info">
+					  No hay jugadores confirmados
+					</div>
+		        #{/else}
+		        
+               #{form @Matches.addGuest(match.id), method: 'POST', class:'form-inline'}
+                 <input type="text" class="input" name="name" placeholder="Agregar invitado">
+                 <button type="submit" class="btn">OK</button>
+               #{/form}
+		        
+	            <div class="form-actions">
+	                #{if loggedPlayer.hasJoined(match)}
+	                    #{form @Matches.leave(match.id), method: 'POST'}
+	                    <button type="submit" class="btn btn-warning">Abandonar</button>
+	                    #{/form}
+	                #{/if}
+	                #{else}
+	                    #{form @Matches.join(match.id), method: 'POST'}
+	                    <button type="submit" class="btn btn-primary">Unirme</button>
+	                    #{/form}
+	                #{/else}
+	                
+	                <form>
+	                    <button type="submit" class="btn">Cargar datos</button>
+	                </form>
+	                
+	                #{form @Matches.cancel(match.id), id:'jCancelMatch'}
+	                <button type="submit" class="btn btn-danger">Cancelar partido</button>
+	                #{/form}
+	            </div>
+		    #{/else}
+		    
         </div>
     </div>
 </div>

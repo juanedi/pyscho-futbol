@@ -27,4 +27,10 @@ public class GuestMatchParticipation extends MatchParticipation {
         return guestName;
     }
 
+    /** @see models.MatchParticipation#isGuest() */
+    @Override
+    public boolean isGuest() {
+        return true;
+    }
+
 }

@@ -6,6 +6,7 @@ package controllers;
 import java.util.Date;
 import java.util.List;
 
+import models.GuestMatchParticipation;
 import models.Match;
 import models.MatchParticipation;
 import models.Player;
@@ -59,7 +60,8 @@ public class Matches extends SecureController {
         Application.index();
     }
 
-    public static void join(final Long matchId, final String username) {
+    public static void join(final Long matchId) {
+        String username = Security.connected();
         Player player = Player.find("byUsername", username).first();
         Match match = Match.findById(matchId);
         RegularMatchParticipation participation = new RegularMatchParticipation();
@@ -67,10 +69,11 @@ public class Matches extends SecureController {
         match.participations.add(participation);
         participation.match = match;
         match.save();
-        Application.index();
+        detail(matchId);
     }
     
-    public static void leave(final Long matchId, final String username) {
+    public static void leave(final Long matchId) {
+        final String username = Security.connected();
         Match match = Match.findById(matchId);
         MatchParticipation participation = 
             RegularMatchParticipation.find("match.id = ?1 and player.username = ?2", matchId, username).first();
@@ -78,4 +81,20 @@ public class Matches extends SecureController {
         participation.delete();
         Application.index();        
     }
+    
+    public static void addGuest(final Long matchId, final String name) {
+        GuestMatchParticipation participation = new GuestMatchParticipation();
+        participation.guestName = name;
+        addParticipation(matchId, participation);
+        detail(matchId);
+    }
+    
+    private static void addParticipation(final Long matchId, final MatchParticipation participation) {
+        Match match = Match.findById(matchId);
+        match.participations.add(participation);
+        participation.match = match;
+        match.save();
+        participation.save();
+    }
+    
 }

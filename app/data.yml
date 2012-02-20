@@ -77,33 +77,39 @@ RegularMatchParticipation(mp1):
     teamA: true
     goals: 2
     player: jedi
+    joinDate: 2012-01-01
     
 RegularMatchParticipation(mp1):
     match: m2
     teamA: true
     goals: 2
     player: jedi
+    joinDate: 2012-01-01
     
 RegularMatchParticipation(mp3):
     match: m1
     teamA: false
     goals: 3
     player: fmolina
+    joinDate: 2012-01-01
     
 RegularMatchParticipation(mp4):
     match: m2
     teamA: false
     goals: 1
     player: fmolina
+    joinDate: 2012-01-01
     
 RegularMatchParticipation(mp5):
     match: m1
     teamA: true
     goals: 2
     player: mrtnslv
+    joinDate: 2012-01-01
     
 RegularMatchParticipation(mp6):
     match: m2
     teamA: false
     goals: 1
     player: mrtnslv
+    joinDate: 2012-01-01

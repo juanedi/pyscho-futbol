@@ -3,17 +3,15 @@
  */
 package models;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -42,6 +40,20 @@ public class Match extends Model {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "match", cascade = CascadeType.ALL)
     public List<MatchParticipation> participations = new LinkedList<MatchParticipation>();
 
+    public List<MatchParticipation> getParticipationsByDate() {
+        Collections.sort(participations, new Comparator<MatchParticipation>() {
+            @Override
+            public int compare(MatchParticipation p1, MatchParticipation p2) {
+                int ret = -1;
+                if (p1.joinDate.after(p2.joinDate)) {
+                    ret = 1;
+                }
+                return ret;
+            }
+        });
+        return participations;
+    }
+    
     public List<MatchParticipation> getPlayersTeamA() {
         return playersForTeam(true);
     }

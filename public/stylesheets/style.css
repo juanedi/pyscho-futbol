@@ -11,17 +11,10 @@
 	margin-right: 25px;
 }
 
-.match-actions {
-	text-align: right;
-}
-
 .noDisplay {
 	display: none;
 }
 
-.match-actions form{
-   display: inline;
-}
 
 .well-header {
   display: block;
@@ -45,4 +38,16 @@
 
 .form-actions {
 	text-align: right;
+}
+
+.form-actions form{
+   display: inline;
+}
+
+.players-list {
+	width: 260px;
+}
+
+.players-list tr td:first-child {
+   width: 10px;
 }

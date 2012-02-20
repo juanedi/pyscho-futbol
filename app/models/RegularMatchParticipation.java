@@ -31,5 +31,11 @@ public class RegularMatchParticipation extends MatchParticipation {
     public static long playedGames(final Player player) {
         return RegularMatchParticipation.count("byPlayer", player);
     }
+
+    /** @see models.MatchParticipation#isGuest() */
+    @Override
+    public boolean isGuest() {
+        return false;
+    }
     
 }

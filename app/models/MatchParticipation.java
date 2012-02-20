@@ -3,6 +3,9 @@
  */
 package models;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -32,6 +35,10 @@ public abstract class MatchParticipation extends Model {
     public Boolean teamA;
     public int goals;
     
+    @Column(name = "join_date", nullable = false)
+    public Date joinDate = new Date();
+    
     public abstract String getPlayerDisplayName();
+    public abstract boolean isGuest();
 
 }
