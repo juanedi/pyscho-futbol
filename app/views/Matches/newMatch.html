@@ -2,6 +2,9 @@
 #{set title:'Pyscho Futbol - Historial de Partidos' /}
 #{set menuItem:'nav-input' /}
 
+<div class="row">
+    <div class="span8">
+    <div class="well">
     #{form @Matches.postMatch(), class:'form-horizontal'}
  
     #{ifErrors}
@@ -31,3 +34,6 @@
     </fieldset>
         
     #{/form}
+    </div>
+    </div>
+</div>
