@@ -4,20 +4,6 @@
 
 <div class="row">
 
-#{if venues.size()}
-<div class="span8">
-<div class="well">
-<legend>Canchas</legend>
-<dl>
-	#{list items:venues, as:'venue'}
-	    <dt>${venue.name}</dt>
-	    <dd><em>Dirección</em> ${venue.address}</dd>
-	#{/list}
-</dl>
-</div>
-</div>
-#{/if}
-
 <div class="span4">
 #{form @Venues.postVenue(), class:'well form-inline'}
     <fieldset>
@@ -40,4 +26,26 @@
     </fieldset>
 #{/form}
 </div>
+
+#{if venues.size()}
+<div class="span8">
+<div class="well">
+<legend>Canchas</legend>
+<dl>
+	#{list items:venues, as:'venue'}
+	    <dt>${venue.name}</dt>
+	    <dd><em>Dirección</em> ${venue.address}</dd>
+	#{/list}
+</dl>
+</div>
+</div>
+#{/if}
+#{else}
+<div class="span8">
+	<div class="alert alert-info">
+	    No hay canchas cargadas
+	</div>
+</div>
+#{/else}
+
 </div>

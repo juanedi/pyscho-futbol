@@ -33,7 +33,7 @@ public class Match extends Model {
 
     public Date date;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     public Venue venue;
     public boolean finished;
     public Integer goalsTeamA;
