@@ -13,6 +13,13 @@ GET     /players/{username}/?                   Players.detail
 GET     /matches/?                              Matches.list
 GET     /matches/new/?                          Matches.newMatch
 GET     /matches/{id}/?                         Matches.detail
+POST    /matches/?                              Matches.postMatch
+POST    /matches/{matchId}/cancel/?             Matches.cancel
+POST    /matches/{matchId}/?                    Matches.setTeam
+POST    /matches/{matchId}/guests/?             Matches.addGuest
+POST    /matches/{matchId}/guestsRemove/?       Matches.removeGuest
+POST    /matches/{matchId}/regulars/?           Matches.join
+POST    /matches/{matchId}/leaveRegulars/?      Matches.leave
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

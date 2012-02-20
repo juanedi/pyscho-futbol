@@ -6,6 +6,8 @@ package controllers;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.OptimisticLock;
+
 import models.GuestMatchParticipation;
 import models.Match;
 import models.MatchParticipation;
@@ -14,6 +16,7 @@ import models.RegularMatchParticipation;
 import models.Venue;
 import play.data.validation.Required;
 import play.db.jpa.JPABase;
+import play.mvc.Http;
 import play.mvc.Http.StatusCode;
 
 /**
@@ -32,7 +35,11 @@ public class Matches extends SecureController {
 
     public static void detail(final Long id) {
         Match match = Match.findById(id);
-        render(match);
+        if (match == null) {
+            response.status = Http.StatusCode.NOT_FOUND;
+        } else {
+            render(match);
+        }
     }
     
     public static void newMatch() {
@@ -47,7 +54,7 @@ public class Matches extends SecureController {
         match.finished = false;
         match.venue = venue;
         match.save();
-        Application.index();
+        detail(match.id);
     }
 
     public static void cancel(final Long matchId) {
@@ -60,6 +67,21 @@ public class Matches extends SecureController {
         Application.index();
     }
 
+    public static void setTeam(final Long matchId, final Long participationId, final String team) {
+        MatchParticipation participation = MatchParticipation.findById(participationId);
+        if (participation != null) {
+            if (team.equals("null")) {
+                participation.teamA = null;
+            } else {
+                participation.teamA = team.equals("A") ? true : !team.equals("B");
+            }
+            participation.save();
+            response.status = Http.StatusCode.ACCEPTED;
+        } else {
+            response.status = Http.StatusCode.BAD_REQUEST;
+        }
+    }
+    
     public static void join(final Long matchId) {
         String username = Security.connected();
         Player player = Player.find("byUsername", username).first();
@@ -74,11 +96,9 @@ public class Matches extends SecureController {
     
     public static void leave(final Long matchId) {
         final String username = Security.connected();
-        Match match = Match.findById(matchId);
         MatchParticipation participation = 
             RegularMatchParticipation.find("match.id = ?1 and player.username = ?2", matchId, username).first();
-        match.participations.remove(participation);
-        participation.delete();
+        removeParticipation(matchId, participation);
         Application.index();        
     }
     
@@ -86,6 +106,12 @@ public class Matches extends SecureController {
         GuestMatchParticipation participation = new GuestMatchParticipation();
         participation.guestName = name;
         addParticipation(matchId, participation);
+        detail(matchId);
+    }
+    
+    public static void removeGuest(final Long matchId, final Long participationId) {
+        GuestMatchParticipation participation = GuestMatchParticipation.findById(participationId);
+        removeParticipation(matchId, participation);
         detail(matchId);
     }
     
@@ -97,4 +123,13 @@ public class Matches extends SecureController {
         participation.save();
     }
     
+    private static void removeParticipation(final Long matchId, final MatchParticipation participation) {
+        Match match = Match.findById(matchId);
+        if (match != null && participation != null) {
+            match.participations.remove(participation);
+            participation.delete();
+        } else {
+            response.status = Http.StatusCode.BAD_REQUEST;
+        }
+    }
 }

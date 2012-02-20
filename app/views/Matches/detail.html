@@ -1,112 +1,153 @@
 #{extends 'main.html' /}
 #{set title:'Pyscho Futbol - Historial de Partidos' /}
 #{set 'moreScripts'}
+    #{script 'jquery.tablesorter.min.js'/}
     #{script 'match.js'/}
 #{/set}
 #{set menuItem:'nav-historic' /}
 
-<div class="row">
-    <div class="span8">
-        <div class="well">
-	        <span class="well-header">Partido ${match.id} (${match.date.format('dd/MM/yyyy')})</span>
-
-            #{if match.finished}
-	        <div class="row teams-details">
-	           <div class="span8">
-	               <div class="row">
-			           <div class="span4">
-			               <h3>Equipo A <em>(${match.goalsTeamA})</em></h3>
-			               <ol>
-			               #{list items:match.playersTeamA, as:'participation'}
-			                 <li>
-			                     ${participation.playerDisplayName}
-		                         #{if participation.goals}
-		                          (${participation.goals} goles)
-		                         #{/if}
-			                 </li>
-			               #{/list}
-			               </ol>
-			           </div>
-			           <div class="span4">
-		                   <h3>Equipo B <em>(${match.goalsTeamB})</em></h3>
-                           <ol>
-                           #{list items:match.playersTeamA, as:'participation'}
-                             <li>
-                                 ${participation.playerDisplayName}
-                                 #{if participation.goals}
-                                  (${participation.goals} goles)
-                                 #{/if}
-                             </li>
-                           #{/list}
-                           </ol>
+<div class="matchDetails" id="${match.id}">
+	<div class="row">
+	    <div class="span8">
+	        <div class="well">
+		        <span class="well-header">Partido ${match.id} (${match.date.format('dd/MM/yyyy')})</span>
+	
+	            #{if match.finished}
+		        <div class="row teams-details">
+		           <div class="span8">
+		               <div class="row">
+				           <div class="span4">
+				               <h3>Equipo A <em>(${match.goalsTeamA})</em></h3>
+				               <ol>
+				               #{list items:match.playersTeamA, as:'participation'}
+				                 <li>
+				                     ${participation.playerDisplayName}
+			                         #{if participation.goals}
+			                          (${participation.goals} goles)
+			                         #{/if}
+				                 </li>
+				               #{/list}
+				               </ol>
+				           </div>
+				           <div class="span4">
+			                   <h3>Equipo B <em>(${match.goalsTeamB})</em></h3>
+	                           <ol>
+	                           #{list items:match.playersTeamA, as:'participation'}
+	                             <li>
+	                                 ${participation.playerDisplayName}
+	                                 #{if participation.goals}
+	                                  (${participation.goals} goles)
+	                                 #{/if}
+	                             </li>
+	                           #{/list}
+	                           </ol>
+			               </div>
 		               </div>
 	               </div>
-               </div>
-	        </div>
-	  
-            <div class="info-line">
-              <span class="line-header">Lugar</span>${match.venue.name}
-            </div>
-            #{if match.striker().goals}
-            <div class="info-line">
-              <span class="line-header">Goleador</span>${match.striker().playerDisplayName} (${match.striker().goals})
-            </div>
-	        #{/if}
-		    #{form @Matches.list()}
-		    <div class="form-actions">
-		        <button type="submit" class="btn btn-primary">Aceptar</button>
-		    </div>
-		    #{/form}
-		    #{/if}
-		    
-		    #{else}
-		        #{if match.participations}
-		        <h3>Jugadores confirmados</h3>
-		        <table class="table players-list">
-                  #{list match.participationsByDate, as:'participation'}
-                    <tr>
-                      <td>${participation_index}</td>
-                      <td>
-                        #{if participation.guest}<em>${participation.playerDisplayName}</em>#{/if}
-                        #{else}${participation.playerDisplayName}#{/else}
-                      </td>
-                    </tr>
-                  #{/list}
-		        </table>
-		        #{/if}
-		        #{else}
-					<div class="alert alert-info">
-					  No hay jugadores confirmados
-					</div>
-		        #{/else}
-		        
-               #{form @Matches.addGuest(match.id), method: 'POST', class:'form-inline'}
-                 <input type="text" class="input" name="name" placeholder="Agregar invitado">
-                 <button type="submit" class="btn">OK</button>
-               #{/form}
-		        
-	            <div class="form-actions">
-	                #{if loggedPlayer.hasJoined(match)}
-	                    #{form @Matches.leave(match.id), method: 'POST'}
-	                    <button type="submit" class="btn btn-warning">Abandonar</button>
-	                    #{/form}
-	                #{/if}
-	                #{else}
-	                    #{form @Matches.join(match.id), method: 'POST'}
-	                    <button type="submit" class="btn btn-primary">Unirme</button>
-	                    #{/form}
-	                #{/else}
-	                
-	                <form>
-	                    <button type="submit" class="btn">Cargar datos</button>
-	                </form>
-	                
-	                #{form @Matches.cancel(match.id), id:'jCancelMatch'}
-	                <button type="submit" class="btn btn-danger">Cancelar partido</button>
-	                #{/form}
+		        </div>
+		  
+	            <div class="info-line">
+	              <span class="line-header">Lugar</span>${match.venue.name}
 	            </div>
-		    #{/else}
-		    
-        </div>
-    </div>
+	            #{if match.striker().goals}
+	            <div class="info-line">
+	              <span class="line-header">Goleador</span>${match.striker().playerDisplayName} (${match.striker().goals})
+	            </div>
+		        #{/if}
+			    #{form @Matches.list()}
+			    <div class="form-actions">
+			        <button type="submit" class="btn btn-primary">Aceptar</button>
+			    </div>
+			    #{/form}
+			    #{/if}
+			    
+			    #{else}
+			        #{if match.participations}
+			        <h3>Jugadores confirmados</h3>
+			        <table id="jPlayers" class="table players-list">
+					    <thead>
+			                <tr>
+			                    <th>Orden</th>
+			                    <th>Jugador</th>
+			                    <th>Equipo</th>
+			                </tr>
+			            </thead>
+	                  #{list match.participationsByDate, as:'participation'}
+	                    <tr id="${participation.id}">
+	                      <td>${participation_index}</td>
+	                      <td>
+	                        #{if participation.guest}<em>${participation.playerDisplayName}</em>#{/if}
+	                        #{else}${participation.playerDisplayName}#{/else}
+	                      </td>
+	                      #{if participation.teamA == null}
+	                      <td class="jPendingAssignment">
+	                       <div class="jTeamSelect">
+	                        <select class="input-mini">
+	                            <option value="A">A</option>
+	                            <option value="B">B</option>
+	                        </select>
+	                        <a href="#" class="jAssignTeam"><i class="icon-ok"></i></a>
+	                        </div>
+	                      </td>
+	                      #{/if}
+	                      #{else}
+	                      <td>
+	                       <div class="jTeamDisplay">
+	                        #{if participation.teamA}A#{/if}
+	                        #{else}B#{/else}
+	                        <a href="#" class="jLeaveTeam"><i class="icon-remove"></i></a>
+	                        </div>
+	                      </td>
+	                      #{/else}
+	                      </td>
+	                    </tr>
+	                  #{/list}
+			        </table>
+			        #{/if}
+			        #{else}
+						<div class="alert alert-info">
+						  No hay jugadores confirmados
+						</div>
+			        #{/else}
+			        
+	               #{form @Matches.addGuest(match.id), method: 'POST', class:'form-inline'}
+	                 <input type="text" class="input" name="name" placeholder="Agregar invitado">
+	                 <button type="submit" class="btn">OK</button>
+	               #{/form}
+			        
+		            <div class="form-actions">
+		                #{if loggedPlayer.hasJoined(match)}
+		                    #{form @Matches.leave(match.id), method: 'POST'}
+		                    <button type="submit" class="btn btn-warning">Abandonar</button>
+		                    #{/form}
+		                #{/if}
+		                #{else}
+		                    #{form @Matches.join(match.id), method: 'POST'}
+		                    <button type="submit" class="btn btn-primary">Unirme</button>
+		                    #{/form}
+		                #{/else}
+		                
+		                <form>
+		                    <button type="submit" class="btn">Cargar resultado</button>
+		                </form>
+		                
+		                #{form @Matches.cancel(match.id), id:'jCancelMatch'}
+		                <button type="submit" class="btn btn-danger">Cancelar partido</button>
+		                #{/form}
+		            </div>
+	                <div class="jTeamSelect jTemplate">
+	                    <select class="input-mini">
+	                        <option value="A">A</option>
+	                        <option value="B">B</option>
+	                    </select>
+	                    <a href="#" class="jAssignTeam"><i class="icon-ok"></i></a>
+	                </div>
+	                <div class="jTeamDisplay jTemplate">
+                     <a href="#" class="jLeaveTeam"><i class="icon-remove"></i></a>
+                    </div>
+			    #{/else}
+			    
+	        </div>
+	    </div>
+	</div>
 </div>

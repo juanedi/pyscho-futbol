@@ -48,6 +48,6 @@
 	width: 260px;
 }
 
-.players-list tr td:first-child {
-   width: 10px;
+.jTemplate {
+	display:none;
 }
