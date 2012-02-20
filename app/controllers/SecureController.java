@@ -21,8 +21,8 @@ public abstract class SecureController extends Controller {
     @Before
     static void setConnectedUser() {
         if (Security.isConnected()) {
-            Player player = Player.find("byUsername", Security.connected()).first();
-            renderArgs.put("loggedPlayer", player);
+            Player loggedPlayer = Player.find("byUsername", Security.connected()).first();
+            renderArgs.put("loggedPlayer", loggedPlayer);
         }
     }
     

@@ -13,3 +13,11 @@
 .match-actions {
 	text-align: right;
 }
+
+.noDisplay {
+	display: none;
+}
+
+.match-actions form{
+   display: inline;
+}

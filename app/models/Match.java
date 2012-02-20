@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -32,14 +33,14 @@ public class Match extends Model {
 
     public Date date;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public Venue venue;
     public boolean finished;
     public Integer goalsTeamA;
     public Integer goalsTeamB;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "match")
-    public List<MatchParticipation> participations;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "match", cascade = CascadeType.ALL)
+    public List<MatchParticipation> participations = new LinkedList<MatchParticipation>();
 
     public List<MatchParticipation> getPlayersTeamA() {
         return playersForTeam(true);

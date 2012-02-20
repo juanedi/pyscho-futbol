@@ -7,9 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 import models.Match;
+import models.MatchParticipation;
+import models.Player;
+import models.RegularMatchParticipation;
 import models.Venue;
 import play.data.validation.Required;
-import play.mvc.Controller;
 import play.mvc.Http.StatusCode;
 
 /**
@@ -50,5 +52,24 @@ public class Matches extends SecureController {
         }
         Application.index();
     }
+
+    public static void join(final Long matchId, final String username) {
+        Player player = Player.find("byUsername", username).first();
+        Match match = Match.findById(matchId);
+        RegularMatchParticipation participation = new RegularMatchParticipation();
+        participation.player = player;
+        match.participations.add(participation);
+        participation.match = match;
+        match.save();
+        Application.index();
+    }
     
+    public static void leave(final Long matchId, final String username) {
+        Match match = Match.findById(matchId);
+        MatchParticipation participation = 
+            RegularMatchParticipation.find("match.id = ?1 and player.username = ?2", matchId, username).first();
+        match.participations.remove(participation);
+        participation.delete();
+        Application.index();        
+    }
 }

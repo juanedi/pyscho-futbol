@@ -2,6 +2,8 @@
 #{set title:'Pyscho Futbol' /}
 
 #{if pendingMatch}
+    #{set newMatchClass: 'noDisplay' /}
+    <span id="jLoggedUser"class="noDisplay">${loggedPlayer.username}</span>
     <div class="row">
     <div class="span8">
         <div class="well">
@@ -16,9 +18,23 @@
               <span class="line-header">Jugadores confirmados</span>${pendingMatch.participations.size()}
             </div>
             <div class="match-actions">
-                #{form @Matches.cancel(pendingMatch.id), class:'form-inline'}
-                <a class="btn" href="#">Cargar datos</a>
-                <button type="submit" class="btn">Cancelar partido</button>
+                #{if loggedPlayer.hasJoined(pendingMatch)}
+	                #{form @Matches.leave(pendingMatch.id, loggedPlayer.username), method: 'POST'}
+	                <button type="submit" class="btn btn-warning">Abandonar</button>
+	                #{/form}
+                #{/if}
+                #{else}
+	                #{form @Matches.join(pendingMatch.id, loggedPlayer.username), method: 'POST'}
+	                <button type="submit" class="btn btn-primary">Unirme</button>
+	                #{/form}
+                #{/else}
+                
+                <form>
+                    <button type="submit" class="btn">Cargar datos</button>
+                </form>
+                
+                #{form @Matches.cancel(pendingMatch.id)}
+                <button type="submit" class="btn btn-danger">Cancelar partido</button>
                 #{/form}
             </div>
         </div>
@@ -76,8 +92,6 @@
     </div>
 </div>
 
-#{ifnot pendingMatch}
-	<div class="alert alert-info">
-	  No hay próximos partidos agendados! <a href="@{Matches.input}">Cargar uno</a>.
-	</div>
-#{/ifnot}
+<div class="alert alert-info #{get 'newMatchClass' /}">
+  No hay próximos partidos agendados! <a href="@{Matches.input}">Cargar uno</a>.
+</div>
