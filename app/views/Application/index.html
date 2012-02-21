@@ -38,6 +38,7 @@
 #{/if}
 
 <div class="row">
+    #{if lastMatch}
 	<div class="span4">
         <div class="well">
             <h3><a href="@{Matches.detail(lastMatch.id)}">Último partido</a></h3>
@@ -52,6 +53,8 @@
             </div>
         </div>
 	</div>
+	#{/if}
+	#{if mvp}
 	<div class="span4 offset1">
         <div class="well">
             <h4>MVP</h4>
@@ -61,9 +64,11 @@
             </div>
         </div>
     </div>
+    #{/if}
 </div>
 
 <div class="row">
+    #{if striker}
     <div class="span4">
         <div class="well">
             <h4>Pichichi</h4>
@@ -76,6 +81,8 @@
             </div>
         </div>
     </div>
+    #{/if}
+    #{if lvp}
     <div class="span4 offset1">
         <div class="well">
             <h4>Piedra</h4>
@@ -85,6 +92,7 @@
             </div>
         </div>
     </div>
+    #{/if}
 </div>
 
 #{ifnot pendingMatch}
