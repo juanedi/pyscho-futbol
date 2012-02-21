@@ -40,54 +40,43 @@ $(document).ready(function() {
 	
 	//-----			ASIGNACIÓN A EQUIPOS		-----//
 	
-	function assignTeam(participationId, team, success) {
-		var matchId = $('.matchDetails').attr('id');
-		var url = psfutbol.api.setTeam({matchId: matchId, participationId: participationId, team: team});
-		console.log(url);
-	    $.ajax({
-	        type: 'POST',
-	        url: url,
-	        timeout: 10000,
-	        complete: function(xmlHttpRequest, textStatus) {
-	        	var status = xmlHttpRequest.status;
-		        if(status == 202) {
-		            success();
-		        } else {
-		        	// TODO manejo de error.
-		        	alert("error!");
-		        }
-	        }
-	    });
-	}
-	
 	$('.jAssignTeam').live('click', function(e) {
 		e.preventDefault();
 		var target = $(e.currentTarget);
 		var participationId = target.closest('tr').attr('id');
-		var selection = target.siblings('select').val();
-		assignTeam(participationId, selection, function() {
-			var td = target.closest('td');
-			td.removeClass('jPendingAssignment');
-			td.empty();
-			var content = $('.jTeamDisplay.jTemplate').clone().removeClass('jTemplate');
-			content.prepend(selection);
-			td.append(content);
-			$("#jPlayers").trigger("update");
-		});
+		var teamA = target.siblings('select').val();
+		psfutbol.api.setTeam(participationId, teamA,
+				function(){
+					var td = target.closest('td');
+					td.removeClass('jPendingAssignment');
+					td.empty();
+					var content = $('.jTeamDisplay.jTemplate').clone().removeClass('jTemplate');
+					var team = teamA == "true" ? "A" : "B";
+					content.prepend(team);
+					td.append(content);
+					$("#jPlayers").trigger("update");
+				},
+				function() {
+					alert("error");
+				});
 	});
 
 	$('.jLeaveTeam').live('click', function(e) {
 		e.preventDefault();
 		var target = $(e.currentTarget);
 		var participationId = target.closest('tr').attr('id');
-		assignTeam(participationId, null, function() {
-			var td = target.closest('td');
-			td.addClass('jPendingAssignment');
-			td.empty();
-			var content = $('.jTeamSelect.jTemplate').clone().removeClass('jTemplate');
-			td.append(content);
-			$("#jPlayers").trigger("update");
-		});
+		psfutbol.api.clearTeam(participationId, 
+				function() {
+					var td = target.closest('td');
+					td.addClass('jPendingAssignment');
+					td.empty();
+					var content = $('.jTeamSelect.jTemplate').clone().removeClass('jTemplate');
+					td.append(content);
+					$("#jPlayers").trigger("update");
+				},
+				function() {
+					alert("error");
+				});
 	});
 	
 }); 

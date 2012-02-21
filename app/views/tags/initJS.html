@@ -1,0 +1,8 @@
+<script type="text/javascript">
+	var psfutbol = {};
+	
+	psfutbol.uriFactory = {
+	        setTeam: #{jsAction @MatchParticipations.setTeam(':participationId', ':teamA') /},
+	        clearTeam: #{jsAction @MatchParticipations.clearTeam(':participationId') /}
+	}
+</script>

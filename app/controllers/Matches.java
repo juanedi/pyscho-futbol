@@ -71,21 +71,6 @@ public class Matches extends SecureController {
         Application.index();
     }
 
-    public static void setTeam(final Long matchId, final Long participationId, final String team) {
-        MatchParticipation participation = MatchParticipation.findById(participationId);
-        if (participation != null) {
-            if (team.equals("null")) {
-                participation.teamA = null;
-            } else {
-                participation.teamA = team.equals("A") ? true : !team.equals("B");
-            }
-            participation.save();
-            response.status = Http.StatusCode.ACCEPTED;
-        } else {
-            response.status = Http.StatusCode.BAD_REQUEST;
-        }
-    }
-    
     public static void join(final Long matchId) {
         String username = Security.connected();
         Player player = Player.find("byUsername", username).first();

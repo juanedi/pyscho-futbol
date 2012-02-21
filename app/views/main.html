@@ -10,17 +10,13 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/jquery-1.7.1.min.js'}" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
-        var psfutbol = {
-        		api: {
-        			// TODO usar jsAction
-        			setTeam: #{jsAction @Matches.setTeam(':matchId', ':participationId', ':team') /}
-        		}
-        };
-        $(document).ready(function(){
-        	// Cada template indica qué elemento del menu resaltar
-            $("##{get 'menuItem' /}").addClass("active");
-        });
+	        $(document).ready(function(){
+	        	// Cada template indica qué elemento del menu resaltar
+	            $("##{get 'menuItem' /}").addClass("active");
+	        });
         </script>
+        #{initJS /}
+        <script src="@{'/public/javascripts/api.js'}" type="text/javascript" charset="UTF-8"></script>
         #{get 'moreScripts' /}
     </head>
     <body>

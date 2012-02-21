@@ -17,11 +17,14 @@ GET     /matches/new/?                          Matches.newMatch
 GET     /matches/{id}/?                         Matches.detail
 POST    /matches/?                              Matches.postMatch
 POST    /matches/{matchId}/cancel/?             Matches.cancel
-POST    /matches/{matchId}/?                    Matches.setTeam
+
+# Participatios
 POST    /matches/{matchId}/guests/?             Matches.addGuest
 POST    /matches/{matchId}/guestsRemove/?       Matches.removeGuest
 POST    /matches/{matchId}/regulars/?           Matches.join
 POST    /matches/{matchId}/leaveRegulars/?      Matches.leave
+PUT     /participations/{participationId}/?      MatchParticipations.setTeam
+DELETE  /participations/{participationId}/?      MatchParticipations.clearTeam
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
