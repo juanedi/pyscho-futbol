@@ -62,53 +62,69 @@
 			    #{/if}
 			    
 			    #{else}
+                    <div class="info-line">
+                      <span class="line-header">Lugar</span>${match.venue.name} (${match.venue.address})
+                    </div>
+                    
+			        <div class="confirmed-players">
 			        #{if match.participations}
-			        <h3>Jugadores confirmados</h3>
-			        <table id="jPlayers" class="table players-list">
-					    <thead>
-			                <tr>
-			                    <th>Orden</th>
-			                    <th>Jugador</th>
-			                    <th>Equipo</th>
-			                </tr>
-			            </thead>
-	                  #{list match.participationsByDate, as:'participation'}
-	                    <tr id="${participation.id}">
-	                      <td>${participation_index}</td>
-	                      <td>
-	                        #{if participation.guest}<em>${participation.playerDisplayName}</em>#{/if}
-	                        #{else}${participation.playerDisplayName}#{/else}
-	                      </td>
-	                      #{if participation.teamA == null}
-	                      <td class="jPendingAssignment">
-	                       <div class="jTeamSelect">
-	                        <select class="input-mini">
-	                            <option value="A">A</option>
-	                            <option value="B">B</option>
-	                        </select>
-	                        <a href="#" class="jAssignTeam"><i class="icon-ok"></i></a>
-	                        </div>
-	                      </td>
-	                      #{/if}
-	                      #{else}
-	                      <td>
-	                       <div class="jTeamDisplay">
-	                        #{if participation.teamA}A#{/if}
-	                        #{else}B#{/else}
-	                        <a href="#" class="jLeaveTeam"><i class="icon-remove"></i></a>
-	                        </div>
-	                      </td>
-	                      #{/else}
-	                      </td>
-	                    </tr>
-	                  #{/list}
-			        </table>
+				        <h3>Jugadores confirmados</h3>
+				        <table id="jPlayers" class="table players-list">
+						    <thead>
+				                <tr>
+				                    <th>Orden</th>
+				                    <th>Jugador</th>
+				                    <th>Equipo</th>
+				                </tr>
+				            </thead>
+		                  #{list match.participationsByDate, as:'participation'}
+		                    <tr id="${participation.id}">
+		                      <td>${participation_index}</td>
+		                      <td>
+		                        #{if participation.guest}<em>${participation.playerDisplayName}</em>#{/if}
+		                        #{else}${participation.playerDisplayName}#{/else}
+		                      </td>
+		                      #{if participation.teamA == null}
+		                      <td class="jPendingAssignment">
+		                       <div class="jTeamSelect">
+		                        <select class="input-mini">
+		                            <option value="A">A</option>
+		                            <option value="B">B</option>
+		                        </select>
+		                        <a href="#" class="jAssignTeam"><i class="icon-ok"></i></a>
+		                        </div>
+		                      </td>
+		                      #{/if}
+		                      #{else}
+		                      <td>
+		                       <div class="jTeamDisplay">
+		                        #{if participation.teamA}A#{/if}
+		                        #{else}B#{/else}
+		                        <a href="#" class="jLeaveTeam"><i class="icon-remove"></i></a>
+		                        </div>
+		                      </td>
+		                      #{/else}
+		                      </td>
+		                    </tr>
+		                  #{/list}
+				        </table>
+			        <div class="jTeamSelect jTemplate">
+                        <select class="input-mini">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                        <a href="#" class="jAssignTeam"><i class="icon-ok"></i></a>
+                    </div>
+                    <div class="jTeamDisplay jTemplate">
+                     <a href="#" class="jLeaveTeam"><i class="icon-remove"></i></a>
+                    </div>
 			        #{/if}
 			        #{else}
 						<div class="alert alert-info">
 						  No hay jugadores confirmados
 						</div>
 			        #{/else}
+			        </div>
 			        
 	               #{form @Matches.addGuest(match.id), method: 'POST', class:'form-inline'}
 	                 <input type="text" class="input" name="name" placeholder="Agregar invitado">
@@ -135,16 +151,6 @@
 		                <button type="submit" class="btn btn-danger">Cancelar partido</button>
 		                #{/form}
 		            </div>
-	                <div class="jTeamSelect jTemplate">
-	                    <select class="input-mini">
-	                        <option value="A">A</option>
-	                        <option value="B">B</option>
-	                    </select>
-	                    <a href="#" class="jAssignTeam"><i class="icon-ok"></i></a>
-	                </div>
-	                <div class="jTeamDisplay jTemplate">
-                     <a href="#" class="jLeaveTeam"><i class="icon-remove"></i></a>
-                    </div>
 			    #{/else}
 			    
 	        </div>

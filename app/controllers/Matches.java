@@ -91,6 +91,8 @@ public class Matches extends SecureController {
         match.participations.add(participation);
         participation.match = match;
         match.save();
+        
+        flash.success("Listo! Participás del partido");
         detail(matchId);
     }
     

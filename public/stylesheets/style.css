@@ -38,6 +38,8 @@
 
 .form-actions {
 	text-align: right;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .form-actions form{
@@ -50,4 +52,12 @@
 
 .jTemplate {
 	display:none;
+}
+
+.confirmed-players {
+	margin-top: 10px;
+}
+
+.form-section {
+    margin-bottom: 10px;
 }

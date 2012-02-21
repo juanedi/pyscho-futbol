@@ -21,5 +21,7 @@ public class Application extends SecureController {
         render(pendingMatch, lastMatch, mvp, striker, lvp);
     }
 
-    
+    public static void register() {
+        
+    }
 }
