@@ -5,6 +5,8 @@ package controllers;
 
 import java.util.List;
 
+import play.data.validation.Required;
+
 import models.Venue;
 
 /**
@@ -21,7 +23,11 @@ public class Venues extends SecureController {
         render(venues);
     }
     
-    public static void postVenue(final String name, final String address) {
+    public static void postVenue(@Required final String name,@Required  final String address) {
+        if (validation.hasErrors()) {
+            flash.error("Todos los campos son requeridos");
+            list();
+        }
         Venue venue = new Venue();
         venue.name = name;
         venue.address = address;

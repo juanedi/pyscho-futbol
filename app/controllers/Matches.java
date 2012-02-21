@@ -48,6 +48,10 @@ public class Matches extends SecureController {
     }
 
     public static void postMatch(@Required final Date date, @Required final Long venueId) {
+        if(validation.hasErrors()) {
+            flash.error("Todos los campos son requeridos");
+            newMatch();
+        }
         Venue venue = Venue.findById(venueId);
         Match match = new Match();
         match.date = date;

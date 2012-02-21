@@ -7,12 +7,6 @@
     <div class="well">
     #{form @Matches.postMatch(), class:'form-horizontal'}
  
-    #{ifErrors}
-        <p class="error">
-            All fields are required!
-        </p>
-    #{/ifErrors}
- 
     <fieldset>
       <legend>Nuevo partido</legend>
       <div class="control-group">
@@ -28,10 +22,16 @@
 			#{/select}
         </div>
       </div>
+    </fieldset>
+	   #{if flash.error}
+	   <div class="alert alert-error">
+	       &{flash.error}
+	   </div>
+	   #{/if}
+      
       <div class="form-actions">
         <button type="submit" class="btn btn-primary">Aceptar</button>
       </div>
-    </fieldset>
         
     #{/form}
     </div>

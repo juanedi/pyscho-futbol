@@ -20,10 +20,15 @@
             <input type="text" id="address" name="address">
         </div>
       </div>
+    </fieldset>
+       #{if flash.error}
+       <div class="alert alert-error">
+           &{flash.error}
+       </div>
+       #{/if}
       <div class="form-actions">
         <button type="submit" class="btn btn-primary">Aceptar</button>
       </div>
-    </fieldset>
 #{/form}
 </div>
 
