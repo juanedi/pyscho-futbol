@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	//-----			SORT DE LA TABLA		-----//
+	//--------------- SORT DE LA TABLA ---------------//
 	
 	$("#jPlayers select").bind('change', function(e) {
 		$("#jPlayers").trigger("update");
@@ -26,7 +26,7 @@ $(document).ready(function() {
 	
     
     
-    //-----			CANCELACION DEL PARTIDO		-----//
+	//--------------- CANCELACIÓN DE PARTIDO ---------------//
     
 	$('#jCancelMatch').bind('submit', function(e){
 		e.preventDefault();
@@ -35,14 +35,14 @@ $(document).ready(function() {
 			this.submit();
 		}
     });
-
+	
+	//--------------- ELIMINACIÓN DE INVITADOS ---------------//
 	
 	function getParticipationId(e) {
 		var target = $(e.currentTarget);
 		return target.closest('tr').attr('id');
 	}
 	
-	//-----			ELIMINACIÓN DE INVITADOS	-----//
 	$('.jRemoveGuest').bind('click', function(e) {
 		e.preventDefault(); 
 		var participationId = getParticipationId(e);
@@ -51,9 +51,7 @@ $(document).ready(function() {
 					// TODO actualizar sin refrescar?
 					document.location = document.location;
 				},
-				function() {
-					alert("error");
-				});
+				psfutbol.api.genericErrorHandler);
 	});
 	
 	
@@ -75,9 +73,7 @@ $(document).ready(function() {
 					td.append(content);
 					$("#jPlayers").trigger("update");
 				},
-				function() {
-					alert("error");
-				});
+				psfutbol.api.genericErrorHandler);
 	});
 
 	$('.jLeaveTeam').live('click', function(e) {
@@ -93,9 +89,7 @@ $(document).ready(function() {
 					td.append(content);
 					$("#jPlayers").trigger("update");
 				},
-				function() {
-					alert("error");
-				});
+				psfutbol.api.genericErrorHandler);
 	});
 	
 }); 

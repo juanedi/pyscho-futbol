@@ -38,5 +38,9 @@ psfutbol.api = {
         clearTeam: function(participationId, success, error) {
             var url = psfutbol.uriFactory.clearTeam({participationId: participationId});
             ajaxCall(url, 'DELETE', 202, success, error);
+        },
+        
+        genericErrorHandler: function() {
+        	$('#jApiError').fadeIn().delay(3000).fadeOut();
         }
 }

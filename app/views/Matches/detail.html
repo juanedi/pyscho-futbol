@@ -131,11 +131,15 @@
 	                 <button type="submit" class="btn">OK</button>
 	               #{/form}
 			        
-	   #{if flash.success}
-       <div class="alert alert-success">
-           &{flash.success}
-       </div>
-       #{/if}
+				   #{if flash.success}
+			       <div class="alert alert-success">
+			           &{flash.success}
+			       </div>
+			       #{/if}
+			        
+			       <div id="jApiError" class="alert alert-error" style="display:none;">
+                          Oooops! Error xD
+                   </div>
 			        
 		            <div class="form-actions">
 		                #{if loggedPlayer.hasJoined(match)}
