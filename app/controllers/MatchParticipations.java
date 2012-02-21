@@ -4,6 +4,7 @@
 package controllers;
 
 import models.MatchParticipation;
+import models.RegularMatchParticipation;
 import play.mvc.Http;
 
 /**
@@ -15,6 +16,24 @@ import play.mvc.Http;
  */
 public class MatchParticipations extends SecureController {
 
+    /** Elimina una {@link MatchParticipation} si es de guest o del usuario loggeado */
+    public static void delete(final Long participationId) {
+        MatchParticipation participation = MatchParticipation.findById(participationId);
+        if (participation == null) {
+            response.status = Http.StatusCode.BAD_REQUEST;
+            return;
+        }
+        if (!participation.isGuest()) {
+            RegularMatchParticipation regularParticipation = (RegularMatchParticipation) participation;
+            if (!regularParticipation.player.username.equals(Security.connected())) {
+                response.status = Http.StatusCode.FORBIDDEN;
+                return;
+            }
+        }
+        participation.delete();
+        response.status = Http.StatusCode.ACCEPTED;
+    }
+    
     public static void setTeam(final Long participationId, final Boolean teamA) {
         MatchParticipation participation = MatchParticipation.findById(participationId);
         if (participation != null && teamA != null) {

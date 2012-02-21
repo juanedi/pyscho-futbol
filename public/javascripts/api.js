@@ -23,6 +23,12 @@ function ajaxCall(url, method, successCode, successCallback, errorCallback) {
 
 psfutbol.api = {
 		
+		deleteParticipation: function(participationId, success, error) {
+        	var url = psfutbol.uriFactory.deleteParticipation({participationId: participationId});
+        	console.log(url);
+        	ajaxCall(url, 'DELETE', 202, success, error);
+        }, 
+		
         setTeam: function(participationId, teamA, success, error) {
         	var url = psfutbol.uriFactory.setTeam({participationId: participationId, teamA: teamA});
         	ajaxCall(url, 'PUT', 202, success, error);

@@ -2,6 +2,7 @@
 	var psfutbol = {};
 	
 	psfutbol.uriFactory = {
+			deleteParticipation: #{jsAction @MatchParticipations.delete(':participationId') /},
 	        setTeam: #{jsAction @MatchParticipations.setTeam(':participationId', ':teamA') /},
 	        clearTeam: #{jsAction @MatchParticipations.clearTeam(':participationId') /}
 	}

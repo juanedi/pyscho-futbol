@@ -81,7 +81,7 @@
 		                    <tr id="${participation.id}">
 		                      <td>${participation_index}</td>
 		                      <td>
-		                        #{if participation.guest}<em>${participation.playerDisplayName}</em>#{/if}
+		                        #{if participation.guest}<em>${participation.playerDisplayName}</em> <a href="."><i class="jRemoveGuest icon-remove"></i></a>#{/if}
 		                        #{else}${participation.playerDisplayName}#{/else}
 		                      </td>
 		                      #{if participation.teamA == null}

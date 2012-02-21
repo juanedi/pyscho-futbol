@@ -37,13 +37,32 @@ $(document).ready(function() {
     });
 
 	
+	function getParticipationId(e) {
+		var target = $(e.currentTarget);
+		return target.closest('tr').attr('id');
+	}
+	
+	//-----			ELIMINACIÓN DE INVITADOS	-----//
+	$('.jRemoveGuest').bind('click', function(e) {
+		e.preventDefault(); 
+		var participationId = getParticipationId(e);
+		psfutbol.api.deleteParticipation(participationId, 
+				function() {
+					// TODO actualizar sin refrescar?
+					document.location = document.location;
+				},
+				function() {
+					alert("error");
+				});
+	});
+	
 	
 	//-----			ASIGNACIÓN A EQUIPOS		-----//
 	
 	$('.jAssignTeam').live('click', function(e) {
 		e.preventDefault();
 		var target = $(e.currentTarget);
-		var participationId = target.closest('tr').attr('id');
+		var participationId = getParticipationId(e);
 		var teamA = target.siblings('select').val();
 		psfutbol.api.setTeam(participationId, teamA,
 				function(){
@@ -64,7 +83,7 @@ $(document).ready(function() {
 	$('.jLeaveTeam').live('click', function(e) {
 		e.preventDefault();
 		var target = $(e.currentTarget);
-		var participationId = target.closest('tr').attr('id');
+		var participationId = getParticipationId(e);
 		psfutbol.api.clearTeam(participationId, 
 				function() {
 					var td = target.closest('td');
