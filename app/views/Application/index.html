@@ -95,8 +95,13 @@
     #{/if}
 </div>
 
+#{if flash.success}
+<div class="alert alert-success">
+    &{flash.success}
+</div>
+#{/if}
 #{ifnot pendingMatch}
-<div class="alert alert-info #{get 'newMatchClass' /}">
+<div class="alert alert-info">
   No hay próximos partidos agendados! <a href="@{Matches.newMatch}">Cargar uno</a>.
 </div>
 #{/ifnot}

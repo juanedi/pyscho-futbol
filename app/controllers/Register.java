@@ -47,7 +47,8 @@ public class Register extends Controller {
         newPlayer.password = password;
         newPlayer.save();
         
-        flash.success("Usuario creado!");
+        flash.success("Felicitaciones! Ya podés jugar al fútbol :)");
+        session.put("username", username);
         Application.index();
     }
 }
