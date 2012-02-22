@@ -18,7 +18,8 @@ import play.test.Fixtures;
 public class Bootstrap extends Job {
 
     public void doJob() {
-        Fixtures.deleteDatabase();
+//        Fixtures.deleteDatabase();
+//        Fixtures.loadModels("data.yml");
     }
     
 }
