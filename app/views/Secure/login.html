@@ -1,0 +1,46 @@
+#{extends 'notlogged.html' /}
+<!-- #{set title:'Pyscho Futbol - Login' /} -->
+
+<div class="row">
+    <div class="span4 offset4">
+	    <div class="well" id="login">
+	    
+	    <h1>&{'secure.title'}</h1>
+	        
+	    #{form @authenticate()}
+	        
+	        <p id="username-field">
+	            <label for="username">&{'secure.username'}</label>
+	            <input type="text" name="username" id="username" value="${flash.username}" />
+	        </p>
+	        <p id="password-field">
+	            <label for="password">&{'secure.password'}</label>
+	            <input type="password" name="password" id="password" value="" />
+	        </p>
+	        <p id="remember-field">
+	            <label class="checkbox" for="remember">&{'secure.remember'}
+	            <input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />
+	            </label>
+	        </p>
+	        
+	        #{if flash.error}
+                <div class="alert alert-error">
+                    &{flash.error}
+                </div>
+            #{/if}
+            #{if flash.success}
+                <div class="alert alert-success">
+                    &{flash.success}
+                </div>
+            #{/if}
+	        
+	        <div class="form-actions">
+	           <p id="signin-field">
+	            <input type="submit" class="btn btn-primary" id="signin" value="&{'secure.signin'}" />
+	            <a href="@{Register.registerForm}" class="btn">&{'secure.signup'}</a>
+	           </p>
+            </div>
+	    #{/form}
+	    </div>
+    </div>
+</div>
