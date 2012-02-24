@@ -27,6 +27,9 @@ DELETE  /participations/{participationId}/?         MatchParticipations.delete
 PUT     /participations/{participationId}/team/?    MatchParticipations.setTeam
 DELETE  /participations/{participationId}/team/?    MatchParticipations.clearTeam
 
+# Venues
+GET     /venues/?                               Venues.list
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
